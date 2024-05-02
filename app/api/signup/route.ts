@@ -5,7 +5,10 @@ import { NextResponse } from 'next/server';
 export async function POST(req: Request) {
   try {
 
-    const { email, password } = await req.json();
+    const { email, password, passwordAgain } = await req.json();
+    
+    // TODO: Create user in the database
+
     await signIn('credentials', { email, password });
     return NextResponse.json({ success: true, message: "" });
 
