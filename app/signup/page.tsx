@@ -34,7 +34,7 @@ export default function SignupPage() {
                 <br /><br />
                 <input type="password" name="password" placeholder="Password" required />
                 <br /><br />
-                <input type="password" name="password-again" placeholder="Password again" required />
+                <input type="password" name="passwordAgain" placeholder="Password again" required />
                 <br /><br />
                 <button type="submit">Sign up</button>
                 <br /><br />

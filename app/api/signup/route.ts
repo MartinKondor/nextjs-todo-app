@@ -7,16 +7,17 @@ export async function POST(req: Request) {
 
     const { email, password, passwordAgain } = await req.json();
     
+    // Validate
+    if (password !== passwordAgain) {
+      return NextResponse.json({ success: false, message: 'The passwords doesn\'t match.' });
+    }
+    
     // TODO: Create user in the database
 
     await signIn('credentials', { email, password });
     return NextResponse.json({ success: true, message: "" });
 
   } catch (error) {
-    if (error instanceof Error) {
-      return NextResponse.json({ success: false, message: 'Invalid credentials.' })
-    } else {
-      return NextResponse.json({ success: false, message: 'Something went wrong.' })
-    }
+    return NextResponse.json({ success: false, message: 'Something went wrong.' });
   }
 }
