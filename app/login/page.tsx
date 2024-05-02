@@ -1,7 +1,7 @@
 'use client';
 import { FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
- 
+
 export default function LoginPage() {
   const router = useRouter()
  
@@ -12,16 +12,16 @@ export default function LoginPage() {
     const email = formData.get('email')
     const password = formData.get('password')
  
-    const response = await fetch('/api/auth/login', {
+    const response = await fetch('http://localhost:3000/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     })
  
     if (response.ok) {
-      router.push('/profile')
+      router.replace('/lists');
     } else {
-      // Handle errors
+      // TODO: Handle errors
     }
   }
  
