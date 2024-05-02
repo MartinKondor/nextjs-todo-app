@@ -1,42 +1,44 @@
 'use client';
-import { FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
- 
+import { FormEvent } from 'react'
+import { useRouter } from 'next/navigation'
+
 export default function SignupPage() {
-    const router = useRouter()
+  const router = useRouter();
  
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+    event.preventDefault();
  
     const formData = new FormData(event.currentTarget);
     const email = formData.get('email');
     const password = formData.get('password');
-    const passwordAgain = formData.get('password-again');
+    const passwordAgain = formData.get('passwordAgain');
  
-    const response = await fetch('/api/auth/signup', {
+    const response = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password, passwordAgain }),
-    })
+    });
  
     if (response.ok) {
-      router.push('/profile')
+      console.log(response);
+      router.replace('/todo-list');
     } else {
-      // Handle errors
+      // TODO: Handle errors
     }
   }
  
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-2 lg:text-left">
+          
             <form onSubmit={handleSubmit}>
-                <input type="email" name="email" placeholder="Email" required />
+                <input className="form-control" type="email" name="email" placeholder="Email" required />
                 <br /><br />
-                <input type="password" name="password" placeholder="Password" required />
+                <input className="form-control" type="password" name="password" placeholder="Password" required />
                 <br /><br />
-                <input type="password" name="passwordAgain" placeholder="Password again" required />
+                <input className="form-control" type="passwordAgain" name="password" placeholder="Password" required />
                 <br /><br />
-                <button type="submit">Sign up</button>
+                <button className="btn btn-secondary" type="submit">Signup</button>
                 <br /><br />
                 <a href="/login">Already have an account?</a>
             </form>
