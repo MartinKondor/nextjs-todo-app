@@ -1,6 +1,11 @@
 import { sql } from '@vercel/postgres';
 import { TodoList, User } from './types';
 
+export type ResponseTemplate = {
+    success: boolean;
+    message: string;
+    data: TodoList | TodoList[] | User | User[] | null;
+}
 
 export async function fetchTodoLists() {
     const response = await fetch('/api/todo-list/list', {
@@ -9,7 +14,7 @@ export async function fetchTodoLists() {
     });
 
     if (response.ok) {
-        return await response.json()
+        return await response.json();
     } else {
         throw new Error('Failed to fetch todo_list data.');
     }

@@ -1,19 +1,23 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { TodoList } from "@/app/types";
-import { fetchTodoLists } from "@/app/data-api";
+import { fetchTodoLists, ResponseTemplate } from "@/app/data-api";
 type ErrorState = string | null;
 
 export default function Lists() {
     const [todoLists, setTodoLists] = useState<TodoList[]>([]);
+    const [response, setResponse] = useState<ResponseTemplate>({success: false, message: "no response", data: null});
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<ErrorState>(null);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const lists = await fetchTodoLists();
-                setTodoLists(lists);
+                const resp = await fetchTodoLists();
+                setResponse(resp);
+                if (resp.success && resp.data) {
+                    setTodoLists(resp.data); // Using data directly from the fetch
+                }
                 setLoading(false);
             } catch (error: any) {
                 console.error('Failed to fetch lists:', error);
@@ -22,9 +26,9 @@ export default function Lists() {
             }
         }
         fetchData();
-    }, []); 
+    }, []);     
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div className="h3 fw-bold">Loading...</div>;
     if (error) return <div>Error: {error}</div>;
 
     return (
@@ -42,14 +46,22 @@ export default function Lists() {
                     </tr>
                 </thead>
                 <tbody>
-                    {todoLists.map(list => (
+                    {todoLists && todoLists.length > 0 ? (todoLists.map(list => (
                         <tr key={list.id}>
-                            <td>{list.id}</td>
-                            <td>{list.user_id}</td>
+                            <td className='small'>
+                                <a href={`/todo-list/${list.id}`}>
+                                    {list.user_id}
+                                </a>
+                            </td>
+                            <td className='small'>
+                                <a href={`/user/${list.user_id}`}>
+                                    {list.user_id}
+                                </a>
+                            </td>
                             <td>{list.title}</td>
                             <td>{list.content}</td>
                         </tr>
-                    ))}
+                    ))) : null}
                 </tbody>
             </table>
         </div>
