@@ -1,3 +1,7 @@
 export default function ListsCreate() {
-    return <p>List Create</p>
+    return (<div>
+        <h1 className="h1 fw-bold mt-2 mb-4">
+          Create a list
+        </h1>
+    </div>);
 }

@@ -1,6 +1,7 @@
 export default function Lists() {
-    
-    // TODO: Get the lists from the local database and list them here
-
-    return <p>Lists</p>
+    return (<div>
+        <h1 className="h1 fw-bold mt-2 mb-4">
+          Edit a list
+        </h1>
+    </div>);
 }

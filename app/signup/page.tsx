@@ -28,9 +28,14 @@ export default function SignupPage() {
   }
  
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-2 lg:text-left">
-          
+    <main>
+        <div>
+            <h1 className="h1 fw-bold mt-2 mb-4">
+              Signup
+            </h1>
+        </div>
+
+        <div>
             <form onSubmit={handleSubmit}>
                 <input className="form-control" type="email" name="email" placeholder="Email" required />
                 <br /><br />

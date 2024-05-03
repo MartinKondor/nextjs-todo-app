@@ -17,7 +17,35 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <nav className="navbar navbar-expand-lg text-left">
+          <div className="container-fluid">
+            <ul className="navbar-nav mb-auto text-center">
+              <li className="nav-item">
+                <a href="/" className="nav-link">
+                  Home
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link">
+                  Login
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/signup" className="nav-link">
+                  Signup
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/todo-list/list" className="nav-link">
+                  TODOs
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        {children}
+      </body>
     </html>
   );
 }

@@ -29,7 +29,9 @@ export default function Lists() {
 
     return (
         <div className="container mt-3">
-            <h2>Todo Lists</h2>
+            <h1 className="h1 fw-bold mt-2 mb-4">
+                TODOs
+            </h1>
             <table className="table table-striped">
                 <thead>
                     <tr>
