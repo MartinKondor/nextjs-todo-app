@@ -16,8 +16,12 @@ export let backendConfig = (): TypeInput => {
         // recipeList contains all the modules that you want to
         // use from SuperTokens. See the full list here: https://supertokens.com/docs/guides
         recipeList: [EmailPasswordNode.init(), SessionNode.init(), Dashboard.init(), UserRoles.init()],
-        isInServerlessEnv: true,
         framework: "custom",
+        database: {
+            type: "postgres",
+            // Assuming DATABASE_URL is stored in environment variables
+            connectionString: process.env.POSTGRES_URL,
+        }
     };
 };
 

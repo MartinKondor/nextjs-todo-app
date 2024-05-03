@@ -1,42 +1,39 @@
-# SuperTokens App with Next.js app directory
+# Next.js TODO app
 
-This is a simple application that is protected by SuperTokens. This app uses the Next.js app directory.
+## Features
 
-## How to use
+- [/lists](http://localhost:3000/lists): Have multiple TODO lists that you can share with others.
+- [/templates](http://localhost:3000/templates): Templates to initialize a useful list quickly.
 
-### Using `create-next-app`
+## Usage
 
--   Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-supertokens with-supertokens-app
+1. First, setup the `.env.local` file in the main directory with the following variables:
+```
+POSTGRES_URL=...
+POSTGRES_PRISMA_URL=...
+POSTGRES_URL_NO_SSL=...
+POSTGRES_URL_NON_POOLING=...
+POSTGRES_USER=...
+POSTGRES_HOST=...
+POSTGRES_PASSWORD=...
+POSTGRES_DATABASE=...
 ```
 
-```bash
-yarn create next-app --example with-supertokens with-supertokens-app
-```
+2. Then seed the database with placeholder data: `npm run seed`.
 
-```bash
-pnpm create next-app --example with-supertokens with-supertokens-app
-```
+3. After this, you are free to start the server: `npm run dev`
 
--   Run `yarn install`
+## Working routes
 
--   Run `npm run dev` to start the application on `http://localhost:3000`.
-
-### Using `create-supertokens-app`
-
--   Run the following command
-
-```bash
-npx create-supertokens-app@latest --frontend=next
-```
-
--   Select the option to use the app directory
-
-Follow the instructions after `create-supertokens-app` has finished
-
-## Notes
-
--   To know more about how this app works and to learn how to customise it based on your use cases refer to the [SuperTokens Documentation](https://supertokens.com/docs/guides)
--   We have provided development OAuth keys for the various built-in third party providers in the `/app/config/backend.ts` file. Feel free to use them for development purposes, but **please create your own keys for production use**.
+* [x] /
+* [] /login
+* [] /signup
+* [] /todo-list
+  * [x] /[todoListId]
+  * [x] /list
+  * [] /create
+  * [] /delete
+  * [] /edit
+* [x] /user
+  * [x] /[userId]
+ 
