@@ -1,18 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
-import { fetchTodoLists, fetchTodoList } from '@/app/data';
+import { fetchUser } from '@/app/data';
 import { useParams } from "next/navigation";
 
 export async function GET(
     req: NextApiRequest,
-    { params }: { params: { todoListId: string } }
+    { params }: { params: { userId: string } }
 ) {
     try {
-        const todoListId: string = params.todoListId;
+        const userId: string = params.userId;
         return NextResponse.json({
             success: true,
             message: "",
-            data: await fetchTodoList(todoListId)
+            data: await fetchUser(userId)
         });
     } catch (error) {
         return NextResponse.json({

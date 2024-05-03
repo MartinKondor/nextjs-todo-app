@@ -27,7 +27,7 @@ export async function fetchTodoList(id: string) {
     });
 
     if (response.ok) {
-        return await response.json()
+        return await response.json();
     } else {
         throw new Error('Failed to fetch todo_list data.');
     }

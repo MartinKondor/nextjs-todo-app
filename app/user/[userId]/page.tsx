@@ -1,27 +1,27 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { TodoList } from "@/app/types";
-import { fetchTodoList, ResponseTemplate } from "@/app/data-api";
+import { User } from "@/app/types";
+import { fetchUser } from "@/app/data-api";
 
 type ErrorState = string | null;
 
-export default function Lists() {
-    const params = useParams<{ todoListId: string; }>()
-    const todoListId: string = params.todoListId;
+export default function UserView() {
+    const params = useParams<{ userId: string; }>()
+    const userId: string = params.userId;
 
-    const [todoList, setTodoList] = useState<TodoList | null>(null);
+    const [viewedUser, setViewedUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<ErrorState>(null);
 
     useEffect(() => {
-        if (!todoListId) return; 
+        if (!userId) return; 
         
         async function fetchData() {
             try {
-                const resp = await fetchTodoList(todoListId);
+                const resp = await fetchUser(userId);
                 if (resp.success && resp.data && !Array.isArray(resp.data)) {
-                    setTodoList(resp.data); 
+                    setViewedUser(resp.data); 
                 } else {
                     setError('Invalid data format received.');
                 }
@@ -33,21 +33,19 @@ export default function Lists() {
             }
         }
         fetchData();
-    }, [todoListId]);    
+    }, [userId]);    
 
     if (loading) return <div className="h3 fw-bold">Loading...</div>;
     if (error) return <div>Error: {error}</div>;
-    if (!todoList) return <div>No TODO list found.</div>;
+    if (!viewedUser) return <div>No user found.</div>;
 
     return (
         <div className="container mt-3">
-            <h1 className="h1 fw-bold mt-2 mb-4">TODO List Details</h1>
+            <h1 className="h1 fw-bold mt-2 mb-4">User Details</h1>
             <div className="card">
                 <div className="card-body">
-                    <h5 className="card-title">{todoList.title}</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">List ID: {todoList.id}</h6>
-                    <p className="card-text">{todoList.content}</p>
-                    <a href={`/user/${todoList.user_id}`} className="card-link">User ID: {todoList.user_id}</a>
+                    <h5 className="card-title">{viewedUser.name}</h5>
+                    <h6 className="card-subtitle mb-2">{viewedUser.email}</h6>
                 </div>
             </div>
         </div>
