@@ -6,6 +6,12 @@ export const authConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
+
+      const isAuthConfigActive = process.env.NODE_ENV !== "development";
+      if (!isAuthConfigActive) {
+        return true;
+      }
+
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/');
       const isOnSignup = nextUrl.pathname.startsWith('/signup');

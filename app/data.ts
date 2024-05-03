@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { TodoList, User } from './types'; 
+import { TodoList, User } from './types';
 
 
 export async function fetchTodoLists() {

@@ -1,14 +1,21 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { signIn } from '@/auth';
+import { NextApiRequest, NextApiResponse, NextRouter } from 'next';
 import { NextResponse } from 'next/server';
+import { fetchTodoLists, fetchTodoList } from '@/app/data';
 
-export async function GET(req: Request) {
+export async function GET(req: NextApiRequest) {
     try {
-        // TODO
+        // TODO: Get the ID from the slug
+        const todoListId = "";
 
-        return NextResponse.json({ success: true, message: "" });
-
+        return NextResponse.json({
+            success: true,
+            message: "",
+            data: await fetchTodoList(todoListId)
+        });
     } catch (error) {
-        return NextResponse.json({ success: false, message: 'Something went wrong.' });
+        return NextResponse.json({
+            success: false,
+            message: `Something went wrong: ${error}`
+        });
     }
 }
