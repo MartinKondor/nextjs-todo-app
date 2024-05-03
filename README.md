@@ -22,3 +22,18 @@ POSTGRES_DATABASE=...
 2. Then seed the database with placeholder data: `npm run seed`.
 
 3. After this, you are free to start the server: `npm run dev`
+
+## Working routes
+
+* [x] /
+* [] /login
+* [] /signup
+* [] /todo-list
+  * [x] /[todoListId]
+  * [x] /list
+  * [] /create
+  * [] /delete
+  * [] /edit
+* [x] /user
+  * [x] /[userId]
+ 

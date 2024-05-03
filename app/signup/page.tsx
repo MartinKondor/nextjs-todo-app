@@ -1,9 +1,10 @@
 'use client';
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function SignupPage() {
   const router = useRouter();
+  const [currentError, setCurrentError] = useState<string | null>(null);
  
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -13,7 +14,7 @@ export default function SignupPage() {
     const password = formData.get('password');
     const passwordAgain = formData.get('passwordAgain');
  
-    const response = await fetch('/api/login', {
+    const response = await fetch('/api/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password, passwordAgain }),
@@ -23,12 +24,16 @@ export default function SignupPage() {
       console.log(response);
       router.replace('/todo-list');
     } else {
-      // TODO: Handle errors
+      setCurrentError(response.message as string);
     }
   }
  
   return (
     <main>
+        <div className="text-danger">
+            {currentError}
+        </div>
+
         <div>
             <h1 className="h1 fw-bold mt-2 mb-4">
               Signup

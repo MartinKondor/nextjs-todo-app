@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
   const router = useRouter();
+  const [currentError, setCurrentError] = useState<string | null>(null);
  
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -22,12 +23,15 @@ export default function LoginPage() {
       console.log(response);
       router.replace('/todo-list');
     } else {
-      // TODO: Handle errors
+      setCurrentError(response.message as string);
     }
   }
  
   return (
     <main>
+        <div className="text-danger">
+            {currentError}
+        </div>
         <h1 className="h1 fw-bold mt-2 mb-4">
           Login
         </h1>
